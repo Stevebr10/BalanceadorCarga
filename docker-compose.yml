@@ -1,32 +1,32 @@
 version: '3.8'
 services:
-  web1:
+  web-example01:
     build: ./web
     networks:
-      - webnet
+      - webnetwork
 
-  web2:
+  web-example02:
     build: ./web
     networks:
-      - webnet
+      - webnetwork
 
   nginx:
     build: ./nginx
     ports:
       - "80:80"
     depends_on:
-      - web1
-      - web2
+      - web-example01
+      - web-example02
     networks:
-      - webnet
+      - webnetwork
 
   ab:
     build: ./ab
     networks:
-      - webnet
+      - webnetwork
     depends_on:
       - nginx
 
 networks:
-  webnet:
+  webnetwork:
     driver: bridge
